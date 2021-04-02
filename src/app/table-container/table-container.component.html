@@ -1,0 +1,80 @@
+<mat-tab-group animationDuration="200ms">
+  <mat-tab label="ALL RECIPE(S)">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="SELECT">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="NAME">
+        <th mat-header-cell *matHeaderCellDef>NAME</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Last updated Column -->
+      <ng-container matColumnDef="LAST UPDATED">
+        <th mat-header-cell *matHeaderCellDef>LAST UPDATED</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.last_updated.date | date }}
+        </td>
+      </ng-container>
+
+      <!-- cogs Column -->
+      <ng-container matColumnDef="COGS">
+        <th mat-header-cell *matHeaderCellDef>COGS %</th>
+        <td mat-cell *matCellDef="let element">{{ element.cogs }}%</td>
+      </ng-container>
+
+      <!-- cost price Column -->
+      <ng-container matColumnDef="COST PRICE">
+        <th mat-header-cell *matHeaderCellDef>COST PRICE</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.cost_price | number: "1.0-2" }}
+        </td>
+      </ng-container>
+      <!--sale price Column -->
+      <ng-container matColumnDef="SALE PRICE">
+        <th mat-header-cell *matHeaderCellDef>SALE PRICE</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sale_price | number: "1.0-2" }}
+        </td>
+      </ng-container>
+
+      <!--gross Column -->
+      <ng-container matColumnDef="GROSS MARGIN">
+        <th mat-header-cell *matHeaderCellDef>GROSS MARGIN</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.gross_margin | number: "1.0-2" }}%
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+      ></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="INCORRECT">Nothing Found!</mat-tab>
+  <mat-tab label="UNTAGGED">Nothing Found!</mat-tab>
+  <mat-tab label="DISABLED">Nothing Found!</mat-tab>
+</mat-tab-group>

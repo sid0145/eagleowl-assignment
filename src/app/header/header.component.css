@@ -1,0 +1,25 @@
+.main {
+  padding: 10px 0px 20px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.header {
+  padding: 1rem;
+  text-align: center;
+  background-color: rgb(238, 203, 203);
+}
+.border {
+  border: 0.5px solid rgb(236, 197, 197);
+  border-radius: 5px;
+}
+.content {
+  display: flex;
+  background-color: #fff;
+}
+.sub-content {
+  padding: 1rem;
+}
+/* :host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #207207;
+} */
