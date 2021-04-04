@@ -4,3 +4,6 @@ table {
 th {
   background-color: rgb(142, 142, 226);
 }
+mat-tab-group {
+  margin-bottom: 2rem;
+}

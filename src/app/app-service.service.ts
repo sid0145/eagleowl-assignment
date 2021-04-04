@@ -8,9 +8,9 @@ import { AppModel } from "./app.model";
 export class AppService {
   constructor(private http: HttpClient) {}
 
-  getData() {
+  getData(page: number) {
     return this.http.get<{ count: number; next: string; results: AppModel[] }>(
-      "https://beta.eagleowl.in/api/v1/mock/organization/18/outlet/18/recipe/recipes/?page=1"
+      `https://beta.eagleowl.in/api/v1/mock/organization/18/outlet/18/recipe/recipes/?page=${page}`
     );
   }
 }

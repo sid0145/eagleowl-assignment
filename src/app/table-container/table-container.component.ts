@@ -3,6 +3,7 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { AppService } from "../app-service.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { AppModel } from "../app.model";
+import { PageEvent } from "@angular/material/paginator/typings/public-api";
 
 @Component({
   selector: "app-table-container",
@@ -10,6 +11,10 @@ import { AppModel } from "../app.model";
   styleUrls: ["./table-container.component.css"],
 })
 export class TableContainerComponent implements OnInit {
+  currentPage = 1;
+  totalData = 0;
+  dataperPage = 10;
+
   displayedColumns: string[] = [
     "SELECT",
     "NAME",
@@ -18,6 +23,7 @@ export class TableContainerComponent implements OnInit {
     "COST PRICE",
     "SALE PRICE",
     "GROSS MARGIN",
+    "TAGS/ACTION",
   ];
   dataSource: AppModel[] = [];
   selection = new SelectionModel<AppModel>(true, []);
@@ -25,9 +31,10 @@ export class TableContainerComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.appService.getData().subscribe((data) => {
+    this.appService.getData(this.currentPage).subscribe((data) => {
       this.dataSource = data.results;
       console.log(this.dataSource);
+      this.totalData = data.count;
     });
   }
 
@@ -53,5 +60,17 @@ export class TableContainerComponent implements OnInit {
     return `${this.selection.isSelected(row) ? "deselect" : "select"} row ${
       row.name + 1
     }`;
+  }
+
+  //*page count
+  onChangedPage(pageData: PageEvent) {
+    this.currentPage = pageData.pageIndex + 1;
+    console.log(this.currentPage);
+    this.appService.getData(this.currentPage).subscribe((data) => {
+      this.dataSource = data.results;
+      console.log(this.dataSource);
+
+      this.totalData = data.count;
+    });
   }
 }
