@@ -11,6 +11,10 @@
 .border {
   border: 0.5px solid rgb(236, 197, 197);
   border-radius: 5px;
+  background-color: #fff;
+}
+.content-1 {
+  margin-right: 10px;
 }
 .content {
   display: flex;
@@ -18,6 +22,9 @@
 }
 .sub-content {
   padding: 1rem;
+}
+.hr-classs {
+  margin-top: 40px;
 }
 /* :host ::ng-deep .mat-progress-spinner circle,
 .mat-spinner circle {

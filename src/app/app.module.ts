@@ -12,6 +12,8 @@ import {
   MatCardModule,
   MatProgressSpinnerModule,
   MatTabsModule,
+  MatPaginatorModule,
+  MatChipsModule,
 } from "@angular/material";
 
 //************all static import */
@@ -29,6 +31,8 @@ import { TableContainerComponent } from "./table-container/table-container.compo
     MatCardModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatPaginatorModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
